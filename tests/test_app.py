@@ -80,3 +80,45 @@ def test_visit_album_show_page_and_go_back(db_connection, page, test_web_address
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text("Albums")
 
+"""
+When I request GET /artists/<id>
+By visting http://{test_web_address}/artists/<id>
+I get an HTML page showing details for that artist
+"""
+def test_get_artist_with_id(db_connection, page, test_web_address):
+    db_connection.seed("seeds/music_library.sql")
+    page.goto(f"http://{test_web_address}/artists/1")
+    h1_tag = page.locator("h1")
+    expect(h1_tag).to_have_text("Pixies")
+    paragraph_tag = page.locator("p")
+    expect(paragraph_tag).to_have_text("Genre: Rock")
+
+"""
+When I request GET /artists
+I get an HTML page with a list of artists
+"""
+def test_get_artists(db_connection, page, test_web_address):
+    db_connection.seed("seeds/music_library.sql")
+    page.goto(f"http://{test_web_address}/artists")
+    h1_tag = page.locator("h1")
+    expect(h1_tag).to_have_text("Artists")
+    li_tags = page.locator("li")
+    expect(li_tags).to_have_text([
+        "Pixies",
+        "ABBA",
+        "Taylor Swift",
+        "Nina Simone"
+    ])
+
+"""
+When I click on an artist name on /artists page
+We get an HTML page for the corresponding artist id
+"""
+def test_visit_artist_shows_page(db_connection, page, test_web_address):
+    db_connection.seed("seeds/music_library.sql")
+    page.goto(f"http://{test_web_address}/artists")
+    page.click("text='Taylor Swift'")
+    h1_tag = page.locator("h1")
+    expect(h1_tag).to_have_text("Taylor Swift")
+    paragraph_tag = page.locator("p")
+    expect(paragraph_tag).to_have_text("Genre: Pop")
