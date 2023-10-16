@@ -9,5 +9,7 @@
 
 I used this project to:
 - [x] Consolidate HTML structure knowledge
-- [x] Consolidate knoledge of testing for HTML content
+- [x] Consolidate knnoledge of testing for HTML content
 - [x] Learn how to use templates to return dynamic HTML
+- [x] Learn how to use links to send GET requests
+- [x] Learn how to test links
