@@ -1,5 +1,6 @@
 from lib.album_repository import AlbumRepository
 from lib.album import Album
+from lib.artist import Artist
 
 """
 When I call AlbumRepository#all
@@ -48,3 +49,14 @@ def test_create_album(db_connection):
         Album(12, 'Ring Ring', 1973, 2),
         Album(13, 'Test Title', 2000, 2)
     ]
+
+"""
+When we call AlbumRepository#find
+With an id
+We get an album object with that id
+"""
+def test_find_album_with_id(db_connection):
+    db_connection.seed("seeds/music_library.sql")
+    repository = AlbumRepository(db_connection)
+    artist = Artist(1, "Pixies", "Rock")
+    assert repository.find(1) == Album(1, 'Doolittle', 1989, 1, artist)
