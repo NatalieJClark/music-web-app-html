@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Artist</title>
+</head>
+<body>
+    <h1>Add a New Arist</h1>
+
+    <form action="/artists", method="POST">
+        {% if errors %}
+            <p class="t-errors">
+                Your submission contains errors: {{errors}}
+            </p>
+        {% endif %}
+        <p>
+            <label for="name">Name</label>
+            <br>
+            <input type="text" name="name" id="name">
+        </p>
+        <p>
+            <label for="genre">Genre</label>
+            <br>
+            <input type="text" name="genre" id="genre">
+        </p>
+        <p>
+            <input type="submit" value="Add Artist">
+        </p>
+    </form>
+</body>
+</html>
