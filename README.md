@@ -4,6 +4,10 @@
 
 - This is my Music Web App HTML project for Makers Module 4 - Web Applications
 - It is the second project for phase 3 of the module
+- It is a simple music web app that stores album and artist data in a database and shows the user requested data as HTML pages.
+- The user can view an HTML page listing the albums or artists.
+- The user can view an HTML page for an individual album or artist from the main list.
+- The user can fill in a form to add new albums and artists, which then show up in the main list.
 
 ## Aims
 
@@ -13,6 +17,12 @@ I used this project to:
 - [x] Learn how to use templates to return dynamic HTML
 - [x] Learn how to use links to send GET requests
 - [x] Learn how to test links
+- [x] Learn how to use forms to send POST requests
+- [x] Learn how to test drive a form
+
+## Problems
+
+- Currently all new Albums created have `artist_id=1`
 
 ## Feedback
 
