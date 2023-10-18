@@ -33,17 +33,13 @@ def test_get_album_with_id(db_connection, page, test_web_address):
     db_connection.seed("seeds/music_library.sql")
     page.goto(f"http://{test_web_address}/albums/1")
     h1_tag = page.locator("h1")
-    expect(h1_tag).to_have_text(
-        "Doolittle"
-    )
+    expect(h1_tag).to_have_text("Doolittle")
+    
     release_year_tag = page.locator(".t-release-year")
-    expect(release_year_tag).to_have_text(
-        "Release year: 1989"
-    )
+    expect(release_year_tag).to_have_text("Release year: 1989")
+
     artist_tag = page.locator(".t-artist")
-    expect(artist_tag).to_have_text(
-        "Artist: Pixies"
-    )
+    expect(artist_tag).to_have_text("Artist: Pixies")
 
 """
 When we click on the link "Surfer Rosa" on the /albums page
@@ -58,14 +54,10 @@ def test_visit_album_shows_page(db_connection, page, test_web_address):
     expect(h1_tag).to_have_text("Surfer Rosa")
 
     release_year_tag = page.locator(".t-release-year")
-    expect(release_year_tag).to_have_text(
-        "Release year: 1988"
-    )
+    expect(release_year_tag).to_have_text("Release year: 1988")
 
     artist_tag = page.locator(".t-artist")
-    expect(artist_tag).to_have_text(
-        "Artist: Pixies"
-    )
+    expect(artist_tag).to_have_text("Artist: Pixies")
 
 """
 When we visit "http://{test_web_address}/albums/1"
@@ -122,3 +114,78 @@ def test_visit_artist_shows_page(db_connection, page, test_web_address):
     expect(h1_tag).to_have_text("Taylor Swift")
     paragraph_tag = page.locator("p")
     expect(paragraph_tag).to_have_text("Genre: Pop")
+
+"""
+When we create a new album
+We see it in the albums index
+"""
+def test_create_album(db_connection, page, test_web_address):
+    db_connection.seed("seeds/music_library.sql")
+    page.goto(f"http://{test_web_address}/albums")
+
+    page.click("text=Add New Album")
+
+    page.fill("input[name=title]", "Test Album")
+    page.fill("input[name=release_year]", "2000")
+    page.fill("input[name=artist]", "Test Artist")
+
+    page.click("text=Add Album")
+
+    h1_tag = page.locator("h1")
+    expect(h1_tag).to_have_text("Test Album")
+
+    release_year_tag = page.locator(".t-release-year")
+    expect(release_year_tag).to_have_text("Release year: 2000")
+
+    # artist_tag = page.locator(".t-artist")
+    # expect(artist_tag).to_have_text("Artist: Test Artist")
+
+"""
+# If we create an album without a title or release year
+# We see an error message
+# """
+def test_validate_new_album(db_connection, page, test_web_address):
+    db_connection.seed("seeds/music_library.sql")
+    page.goto(f"http://{test_web_address}/albums")
+
+    page.click("text=Add New Album")
+    page.click("text=Add Album")
+
+    errors_tag = page.locator(".t-errors")
+    expect(errors_tag).to_have_text("Your submission contains errors: Title can't be blank, Release Year can't be blank")
+
+"""
+When we create a new artist
+We see it in the artists index
+"""
+def test_create_artist(db_connection, page, test_web_address):
+    db_connection.seed("seeds/music_library.sql")
+    page.goto(f"http://{test_web_address}/artists")
+
+    page.click("text=Add New Artist")
+
+    page.fill("input[name=name]", "Test Artist")
+    page.fill("input[name=genre]", "Test Genre")
+
+    page.click("text=Add Artist")
+
+    h1_tag = page.locator("h1")
+    expect(h1_tag).to_have_text("Test Artist")
+
+    genre_tag = page.locator("p")
+    expect(genre_tag).to_have_text("Genre: Test Genre")
+
+"""
+# If we create an artist without a name or genre
+# We see an error message
+# """
+def test_validate_new_artist(db_connection, page, test_web_address):
+    db_connection.seed("seeds/music_library.sql")
+    page.goto(f"http://{test_web_address}/artists")
+
+    page.click("text=Add New Artist")
+
+    page.click("text=Add Artist")
+
+    errors_tag = page.locator(".t-errors")
+    expect(errors_tag).to_have_text("Your submission contains errors: Name can't be blank, Genre can't be blank")
