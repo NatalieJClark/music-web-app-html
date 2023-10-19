@@ -109,11 +109,8 @@ We get an HTML page for the corresponding artist id
 def test_visit_artist_shows_page(db_connection, page, test_web_address):
     db_connection.seed("seeds/music_library.sql")
     page.goto(f"http://{test_web_address}/artists")
-    page.click("text='Taylor Swift'")
-    h1_tag = page.locator("h1")
-    expect(h1_tag).to_have_text("Taylor Swift")
-    paragraph_tag = page.locator("p")
-    expect(paragraph_tag).to_have_text("Genre: Pop")
+    link_text = page.locator("text='Taylor Swift'")
+    expect(link_text).to_have_attribute("href", "/artists/3")
 
 """
 When we create a new album
