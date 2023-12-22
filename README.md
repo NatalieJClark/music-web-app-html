@@ -20,6 +20,11 @@ I used this project to:
 - [x] Learn how to use forms to send POST requests
 - [x] Learn how to test drive a form
 
+Using Links To Send GET Requests Challenge:
+- [x] Test-drive and implement the following changes to the music_web_app_html project:
+  - [x] Add a route GET /artists/<id> which returns an HTML page showing details for a single artist.
+  - [x] Add a route GET /artists which returns an HTML page with the list of artists. This page should contain a link for each artist listed, linking to /artists/<id> where <id> needs to be the corresponding artist id.
+
 ## Problems
 
 - Currently all new Albums created have `artist_id=1`
