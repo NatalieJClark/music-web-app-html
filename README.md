@@ -46,7 +46,6 @@ Using Links To Send GET Requests Challenge:
 
 # Install the virtual browser we will use for testing
 ; playwright install
-# If you have problems with the above, contact your coach
 
 # Create a test and development database
 ; createdb YOUR_PROJECT_NAME
